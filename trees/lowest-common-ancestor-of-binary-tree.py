@@ -5,6 +5,8 @@
 #         self.left = None
 #         self.right = None
 
+
+#NOTE: THIS DOES NOT PASS THE TEST CASE WITH LIKE 10,000 NODES ON LEETCODE :( it doens't satisfy the space limit
 class Solution(object):
     def lowestCommonAncestor(self, root, p, q):
         """
