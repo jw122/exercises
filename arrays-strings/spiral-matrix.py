@@ -1,49 +1,35 @@
-class Solution(object):
-    def spiralOrder(self, matrix):
-        """
-        :type matrix: List[List[int]]
-        :rtype: List[int]
-        """
-        rows = len(matrix)
-        cols = len(matrix[0])
-        
-        left = 0
-        right = cols-1
-        top = 0
-        bottom = rows-1
-        direction = 0
-        res = []
-        
-        while (top <= bottom and left <= right):
-            if(direction==0):
-                for i in range(left, right):
-                    res.append(matrix[top][i])
-                
-                top+=1
-                direction+=1
-                
-            elif(direction==1):
-                for i in range(top, bottom):
-                    res.append(matrix[i][right])
-                    
-                right-=1
-                direction+=1
-                
-            elif(direction==2):
-                for i in range(right, left, -1):
-                    res.append(matrix[bottom][i])
-                
-                bottom-=1
-                direction+=1
-                
-            elif(direction==3):
-                for i in range(bottom, top, -1):
-                    res.append(matrix[i][left])
-                    
-                left+=1
-                direction+=1
-        print res
-        return res
-        
+def spiralOrder(self, matrix):
+    """
+    :type matrix: List[List[int]]
+    :rtype: List[int]
+    """
 
-                    
+    if matrix == []: 
+        return []
+    upLimit = 0
+    leftLimit = 0
+    downLimit = len(matrix)-1
+    rightLimit = len(matrix[0])-1
+    direction = 0 
+    res = []
+    while True:
+        if direction == 0:
+            for i in range(leftLimit, rightLimit+1):
+                res.append(matrix[upLimit][i])
+            upLimit += 1
+        if direction == 1:
+            for i in range(upLimit, downLimit+1):
+                res.append(matrix[i][rightLimit])
+            rightLimit -= 1
+        if direction == 2:
+            for i in range(rightLimit, leftLimit-1, -1):
+                res.append(matrix[downLimit][i])
+            downLimit -= 1
+        if direction == 3:
+            for i in range(downLimit, upLimit-1, -1):
+                res.append(matrix[i][leftLimit])
+            leftLimit += 1
+            
+        if upLimit > downLimit or leftLimit > rightLimit: 
+            return res
+        direction = (direction+1) % 4
