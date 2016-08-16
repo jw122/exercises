@@ -1,30 +1,29 @@
-class Solution(object):
-    def countAndSay(self, n):
-        """
-        :type n: int
-        :rtype: str
-        """
-        curr = "1"
-        seqs = 1
+def countAndSay(self, n):
+    """
+    :type n: int
+    :rtype: str
+    """
+    
+    itr = 1
+    curr = "1"
+    
+    while itr < n:
+        count = 1
+        result_string = ""
         
-        while seqs < n:
-            repeat_count = 1
-            string = ""
+        for i in range(1, len(curr)):
+            if curr[i] == curr[i-1]:
+                count += 1
+            else:
+                result_string +=str(count)
+                result_string += curr[i-1]
+                count = 1
+                
+        # for last item in curr, since we started at 1
+        result_string += str(count)
+        result_string += curr[-1]
+        curr = result_string
 
-            for i in range(1, len(curr)):
-                if curr[i] == curr[i-1]:
-                    repeat_count += 1
-
-                else:
-                    string += str(repeat_count)
-                    string += curr[i-1]
-                    repeat_count = 1
-            
-            string += str(repeat_count)
-            string += curr[-1]
-            curr = string
-            seqs +=1
-            
-        return curr
-        
-        
+        itr+=1
+    
+    return str(curr)
