@@ -12,23 +12,21 @@ class Solution(object):
         :type sum: int
         :rtype: bool
         """
-        
-        if not root:
-            return False
-            
-        root.sum = root.val
         queue = [root]
+        root.currSum = root.val
         
         while len(queue) > 0:
-            node = queue.pop(0)
-            if node.sum == sum and not node.left and not node.right:
-                return True
-                
-            if node.left:
-                node.left.sum = node.sum + node.left.val
-                queue.append(node.left)
-            if node.right:
-                node.right.sum = node.sum + node.right.val
-                queue.append(node.right)
-                
+            currNode = queue.pop(0)
+            if !currNode.left and !currNode.right:
+                if currNode.currSum == sum:
+                    return True
+            if currNode.left:
+                currNode.left.currSum = currNode.currSum + currNode.left.val
+                queue.append(currNode.left)
+            if currNode.right:
+                currNode.right.currSum = currNode.currSum + currNode.right.val
+                queue.append(currNode.right)
+            
         return False
+                
+        
