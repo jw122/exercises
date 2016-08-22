@@ -7,7 +7,7 @@ class Solution(object):
         rows = len(grid)
         cols = len(grid[0])
         
-        dp = [[0]*cols]*rows
+        dp = [[0 for i in range(cols)] for j in range(rows)]
         
         dp[0][0] = grid[0][0]
         

@@ -1,43 +1,24 @@
-# Definition for a binary tree node.
-# class TreeNode(object):
-#     def __init__(self, x):
-#         self.val = x
-#         self.left = None
-#         self.right = None
-
-
-#NOTE: THIS DOES NOT PASS THE TEST CASE WITH LIKE 10,000 NODES ON LEETCODE :( it doens't satisfy the space limit
-class Solution(object):
-    def lowestCommonAncestor(self, root, p, q):
-        """
-        :type root: TreeNode
-        :type p: TreeNode
-        :type q: TreeNode
-        :rtype: TreeNode
-        """
-        queue = [root]
-        root.ancestors = [root.val]
-        
-        while(len(queue) > 0):
-            node = queue.pop(0)
-            
-            if node.left:
-                node.left.ancestors = node.ancestors + [node.left.val]
-                queue.append(node.left)
-            if node.right:
-                node.right.ancestors = node.ancestors + [node.right.val]
-                queue.append(node.right)
-
-        if(len(p.ancestors)==len(q.ancestors)):
-            return p.ancestors[len(p.ancestors)-2]
-        
-        if(p.ancestors[len(p.ancestors)-1] in q.ancestors):
-            return p.ancestors[len(p.ancestors)-1]
-        elif(q.ancestors[len(q.ancestors)-1] in p.ancestors):
-            return q.ancestors[len(q.ancestors)-1]
-        
-        for i in p.ancestors:
-            if i in q.ancestors:
-                return i
-            
+def findLCA(root, n1, n2):
+     
+    # Base Case
+    if root is None:
         return None
+ 
+    # If either n1 or n2 matches with root's key, report
+    #  the presence by returning root (Note that if a key is
+    #  ancestor of other, then the ancestor key becomes LCA
+    if root.key == n1 or root.key == n2:
+        return root 
+ 
+    # Look for keys in left and right subtrees
+    left_lca = findLCA(root.left, n1, n2) 
+    right_lca = findLCA(root.right, n1, n2)
+ 
+    # If both of the above calls return Non-NULL, then one key
+    # is present in one subtree and other is present in other,
+    # So this node is the LCA
+    if left_lca and right_lca:
+        return root 
+ 
+    # Otherwise check if left subtree or right subtree is LCA
+    return left_lca if left_lca is not None else right_lca
