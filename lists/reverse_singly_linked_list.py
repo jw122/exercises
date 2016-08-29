@@ -4,14 +4,24 @@ class Solution(object):
         :type head: ListNode
         :rtype: ListNode
         """
-        p1 = None
-        p2 = head
-        p3 = None
+        prev = None
+        curr = head
+        next = None
         
-        while p2!=None:
-            p3 = p2.next
-            p2.next = p1
-            p1 = p2
-            p2 = p3
-        head = p1
-        return head
+        while curr!=None:
+            next = curr.next
+            curr.next = prev
+            prev = curr
+            curr = next
+        return prev
+
+    def reverseRecursive(self, start_node):
+        if not start_node.next:
+            return start_node
+        else:
+            new_start = reverseRecursive(start_node)
+
+        node.next.next = start_node
+        start_node.next = None
+
+        return new_start
