@@ -20,5 +20,8 @@ def findLCA(root, n1, n2):
     if left_lca and right_lca:
         return root 
  
-    # Otherwise check if left subtree or right subtree is LCA
-    return left_lca if left_lca is not None else right_lca
+    if not left_lca:
+        return right_lca
+    else:
+        return left_lca
+        

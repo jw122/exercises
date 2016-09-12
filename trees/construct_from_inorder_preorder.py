@@ -18,8 +18,8 @@ class Solution(object):
             return TreeNode(inorder[0])
             
         root = TreeNode(postorder[len(postorder) - 1])
-        key_index = inorder.index(postorder[len(postorder)-1])
+        root_index = inorder.index(postorder[len(postorder)-1])
         
-        root.left = self.buildTree(inorder[0:key_index], postorder[0:key_index])
-        root.right = self.buildTree(inorder[key_index + 1:len(inorder)], postorder[key_index:len(postorder)-1])
+        root.left = self.buildTree(inorder[0:root_index], postorder[0:root_index])
+        root.right = self.buildTree(inorder[root_index + 1:len(inorder)], postorder[root_index:len(postorder)-1])
         return root
