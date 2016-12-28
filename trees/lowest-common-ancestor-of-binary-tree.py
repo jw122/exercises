@@ -24,4 +24,3 @@ def findLCA(root, n1, n2):
         return right_lca
     else:
         return left_lca
-        
